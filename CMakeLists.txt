@@ -568,8 +568,12 @@ add_definitions(${REQUIRED_STD_CXX_FLAGS})
 
 add_definitions(-DBOOST_MATH_DISABLE_FLOAT128=1)
 if(WIN32)
-	add_definitions(-Wa,-mbig-obj -O3)
+	add_definitions(-Wa,-mbig-obj)
+	if(NOT ${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+		add_definitions(-O3)
+	endif()
 endif()
+
 
 if(ENABLE_FLOW)
 	add_definitions(-DENABLE_FLOW)
